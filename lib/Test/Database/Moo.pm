@@ -1,12 +1,12 @@
 package Test::Database::Moo;
 
-use 5.006;
-use strict;
-use warnings FATAL => 'all';
+use Module::Find qw(findsubmod);
+use Moo;
+extends 'Test::Roo';
 
 =head1 NAME
 
-Test::Database::Moo - The great new Test::Database::Moo!
+Test::Database::Moo - Test against multiple database backends using Test::Roo.
 
 =head1 VERSION
 
@@ -16,24 +16,53 @@ Version 0.01
 
 our $VERSION = '0.01';
 
-
 =head1 SYNOPSIS
 
-Extends Test::Roo to simplify database testing on multiple backends.
+=head1 DESCRIPTION
+
+=head1 ATTRIBUTES
+
+=head2 available_drivers
+
+=cut
+
+has available_drivers => (
+    is => 'lazy',
+);
+
+sub _build_available_drivers {
+    my $self = shift;
+    my @possible_
+
+}
+
+=head2 potential_drivers
+
+Potential drivers that might be available depending on availability of other modules.
+
+=cut
+
+has potential_drivers => (
+    is => 'lazy',
+);
+
+=head1 METHODS
 
 =head1 AUTHOR
 
 Peter Mottram (SysPete), C<< <peter at sysnix.com> >>
 
+=head1 CONTRIBUTORS
+
 =head1 BUGS
 
-Please report any bugs or feature requests to C<bug-test-moo-database at rt.cpan.org>, or through the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=Test-Moo-Database>.  I will be notified, and then you'll automatically be notified of progress on your bug as I make changes.
+Probably lots at this stage of development.
 
 =head1 SUPPORT
 
-
 =head1 ACKNOWLEDGEMENTS
 
+David Golden <dagolden@cpan.org> for his excellent L<Test::Roo> on which this distribution is based.
 
 =head1 LICENSE AND COPYRIGHT
 
