@@ -1,8 +1,14 @@
 package Test::Database::Moo;
 
+use Carp;
+use Class::C3::Componentised qw(ensure_class_loaded);
+use Data::Dumper::Concise;
 use Module::Find qw(findsubmod);
+use MooX::Types::MooseLike::Base qw(ArrayRef);
 use Moo;
 extends 'Test::Roo';
+
+use namespace::clean;
 
 =head1 NAME
 
@@ -24,29 +30,55 @@ our $VERSION = '0.01';
 
 =head2 available_drivers
 
+Read-only. Returns an arrayref of available drivers. To discover all potential drivers see L</potential_drivers> and to find out why a specific driver is not available call C<requires> on the driver.
+
 =cut
 
 has available_drivers => (
     is => 'lazy',
+    isa => ArrayRef,
 );
 
 sub _build_available_drivers {
     my $self = shift;
-    my @possible_
-
+    my @available_drivers;
+    foreach my $driver ( @{$self->potential_drivers} ) {
+        eval "require $driver";
+        if ( $driver->can("available") ) {
+            push @available_drivers, $driver;
+        }
+    }
+    return \@available_drivers;
 }
 
 =head2 potential_drivers
 
-Potential drivers that might be available depending on availability of other modules.
+Read-only. Returns an arrayref of potential drivers.
 
 =cut
 
 has potential_drivers => (
     is => 'lazy',
+    isa => ArrayRef,
 );
 
+sub _build_potential_drivers {
+    my $self = shift;
+    my @potential_drivers = findsubmod Test::Database::Moo::Driver;
+    return \@potential_drivers;
+};
+
 =head1 METHODS
+
+=head2 explain_missing_drivers
+
+Explain why certain drivers are missing.
+
+=cut
+
+sub explain_missing_drivers {
+    return "Not implemented";
+}
 
 =head1 AUTHOR
 

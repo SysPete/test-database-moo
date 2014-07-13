@@ -1,4 +1,4 @@
-package Role::PostgreSQL;
+package Test::Database::Moo::Driver::PostgreSQL;
 
 use Test::More;
 use Test::Roo::Role;

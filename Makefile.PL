@@ -4,10 +4,10 @@ use warnings FATAL => 'all';
 use ExtUtils::MakeMaker;
 
 WriteMakefile(
-    NAME             => 'Test::Moo::Database',
+    NAME             => 'Test::Database::Moo',
     AUTHOR           => q{Peter Mottram (SysPete) <peter@sysnix.com>},
-    VERSION_FROM     => 'lib/Test/Moo/Database.pm',
-    ABSTRACT_FROM    => 'lib/Test/Moo/Database.pm',
+    VERSION_FROM     => 'lib/Test/Database/Moo.pm',
+    ABSTRACT_FROM    => 'lib/Test/Database/Moo.pm',
     LICENSE          => 'Perl_5',
     PL_FILES         => {},
     MIN_PERL_VERSION => 5.006,
@@ -18,8 +18,9 @@ WriteMakefile(
         'Test::More' => 0,
     },
     PREREQ_PM => {
-        'Test::Roo' => 1.003,
+        'MooX::Types::MooseLike' => 0.25,
+        'Test::Roo'              => 1.003,
     },
     dist  => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
-    clean => { FILES => 'Test-Moo-Database-*' },
+    clean => { FILES => 'Test-Database-Moo-*' },
 );

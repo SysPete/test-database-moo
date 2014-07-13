@@ -1,11 +1,11 @@
-package Role::SQLite;
+package Test::Database::Moo::Driver::SQLite;
 
 use Test::More;
 use Test::Roo::Role;
 with 'Role::Database';
 
 eval "use DBD::SQLite";
-plan skip_all => "DBD::SQLite required" if $@;
+#plan skip_all => "DBD::SQLite required" if $@;
 
 sub _build_database {
     # does nothing atm for SQLite
